@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BooksController;
+                         
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +22,12 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/books', [BooksController::class, 'index']);
+
+Route::controller(BooksController::class)->group(function () {
+    Route::get('/books/{id}', 'show');
+    Route::post('/books', 'store');
+});
+
