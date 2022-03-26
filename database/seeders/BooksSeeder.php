@@ -24,7 +24,6 @@ class BooksSeeder extends Seeder
             'category_id' => 1,
             'publication_date' => date("Y-m-d H:i:s",strtotime("01/05/2003")),            
             'image' => "51rxEvLljUL._SY291_BO1,204,203,200_QL40_FMwebp_.webp",
-            'user_id' => 1,            
             'copies' => 0,            
             'created_at'=>$now,
             'updated_at'=>$now,
@@ -69,7 +68,6 @@ class BooksSeeder extends Seeder
             'category_id' => 3,
             'publication_date' => date("Y-m-d H:i:s",strtotime("19/05/2009")),            
             'image' => "51S12ntkIbL._SX323_BO1,204,203,200_.jpg",
-            'user_id' => 1,
             'copies' => 4,              
             'created_at'=>$now,
             'updated_at'=>$now,
@@ -85,5 +83,16 @@ class BooksSeeder extends Seeder
             'created_at'=>$now,
             'updated_at'=>$now,
         ]);
+        //pivot table
+        DB::table('book_user')->insert([
+            'book_id' => 1,    
+            'user_id' => 1,   
+        ]);
+        DB::table('book_user')->insert([
+            'book_id' => 5,    
+            'user_id' => 1,   
+        ]);
+
+
     }
 }

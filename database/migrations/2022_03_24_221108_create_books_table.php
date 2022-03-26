@@ -20,9 +20,7 @@ return new class extends Migration
             $table->string('author');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
-            $table->date('publication_date');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');            
+            $table->date('publication_date');           
             $table->string('image')->nullable();
             $table->integer('copies');
             $table->timestamps();
