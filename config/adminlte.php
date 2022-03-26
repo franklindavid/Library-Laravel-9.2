@@ -1,5 +1,6 @@
 <?php
-
+// use App\Models\Category;
+// $books = Book::all();
 return [
 
     /*
@@ -45,8 +46,8 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo' => '<b>Maniak</b>LS',
+    'logo_img' => 'vendor/adminlte/dist/img/librarylogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -85,7 +86,7 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
+    'layout_fixed_sidebar' => true,
     'layout_fixed_navbar' => null,
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
@@ -127,7 +128,7 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-dark-secondary elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -146,14 +147,14 @@ return [
     */
 
     'sidebar_mini' => 'lg',
-    'sidebar_collapse' => false,
+    'sidebar_collapse' => true,
     'sidebar_collapse_auto_size' => false,
     'sidebar_collapse_remember' => false,
     'sidebar_collapse_remember_no_transition' => true,
-    'sidebar_scrollbar_theme' => 'os-theme-light',
+    'sidebar_scrollbar_theme' => 'os-theme-secondary',
     'sidebar_scrollbar_auto_hide' => 'l',
     'sidebar_nav_accordion' => true,
-    'sidebar_nav_animation_speed' => 300,
+    'sidebar_nav_animation_speed' => 100,
 
     /*
     |--------------------------------------------------------------------------
@@ -228,8 +229,16 @@ return [
         // Navbar items:
         [
             'type'         => 'navbar-search',
-            'text'         => 'search',
-            'topnav_right' => true,
+            'text'         => 'search book',        // Placeholder for the underlying input.
+            'topnav_right' => true,            // Or "topnav => true" to place on the left.
+            'url'          => '/home', // The url used to submit the data ('#' by default).
+            'method'       => 'get',          // 'get' or 'post' ('get' by default).
+            'input_name'   => 'book',     // Name for the underlying input ('adminlteSearch' by default).
+            'id'           => 'navbarSearch'
+        ],
+        [
+            'type'         => 'darkmode-widget',
+            'topnav_right' => true, // Or "topnav => true" to place on the left.
         ],
         [
             'type'         => 'fullscreen-widget',
@@ -246,78 +255,55 @@ return [
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
+        // [
+        //     'text'        => 'pages',
+        //     'url'         => 'admin/pages',
+        //     'icon'        => 'far fa-fw fa-file',
+        //     'label'       => 4,
+        //     'label_color' => 'success',
+        // ],
+        // ['header' => 'account_settings'],
         [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'text' => 'home',
+            'url'  => '/home',
+            'icon' => 'fas fa-fw fa-home',
         ],
-        ['header' => 'account_settings'],
+        // [
+        //     'text' => 'change_password',
+        //     'url'  => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-lock',
+        // ],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
+            'key'    => 'categories',
+            'text'    => 'Categories',
+            'icon'    => 'fas fa-fw fa-list',
             'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
+                // [
+                //     'text' => 'level_one',
+                //     'url'  => '#',
+                // ],
+                // [
+                //     'text' => 'level_one',
+                //     'url'  => '#',
+                // ],
             ],
         ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
+        // ['header' => 'labels'],
+        // [
+        //     'text'       => 'important',
+        //     'icon_color' => 'red',
+        //     'url'        => '#',
+        // ],
+        // [
+        //     'text'       => 'warning',
+        //     'icon_color' => 'yellow',
+        //     'url'        => '#',
+        // ],
+        // [
+        //     'text'       => 'information',
+        //     'icon_color' => 'cyan',
+        //     'url'        => '#',
+        // ],
     ],
 
     /*

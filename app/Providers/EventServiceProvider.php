@@ -27,7 +27,19 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+       Event::listen(BuildingMenu::class, function (BuildingMenu $event) {
+
+            $event->menu->add(trans('home'));
+
+            $items = Category::all()->map(function (Category $category) {
+                return [
+                    'text' => $category['name'],
+                    'url' => route('books.index', $category)
+                ];
+            });
+    
+            $event->menu->add(...$items);
+        }); 
     }
 
     /**

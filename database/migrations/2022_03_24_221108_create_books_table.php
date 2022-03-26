@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
+            $table->string('isbn')->unique();
             $table->string('name');
             $table->string('author');
             $table->unsignedBigInteger('category_id');
@@ -22,6 +23,8 @@ return new class extends Migration
             $table->date('publication_date');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');            
+            $table->string('image')->nullable();
+            $table->integer('copies');
             $table->timestamps();
         });
     }
