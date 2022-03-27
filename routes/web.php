@@ -24,10 +24,9 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/books', [BooksController::class, 'index'])->name('books.index');
-
 Route::controller(BooksController::class)->group(function () {
     Route::get('/books/{id}', 'show')->name('books.show');
     Route::post('/books', 'store')->name('books.store');
+    Route::get('/books', 'index')->name('books.index');
 });
 
