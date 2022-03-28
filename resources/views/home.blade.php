@@ -9,6 +9,7 @@
 @stop
 
 @section('content')
+    @include('flash::message')
     @php
         $count = 0;
     @endphp
@@ -20,9 +21,10 @@
             <div class="row" id="hola">
         @endif        
             <div class="col-md-4">
-                <div class="card-body">
-                    
-                    <a href="{{ route('books.show',$book->id) }}"><img class="img-fluid pad " src="{{asset('img/books/'.$book->image)}}" alt="Photo" width="195" height="293" ></a>
+                <div class="card-body">   
+                    <a href="{{ route('books.show',$book->id) }}"><img class="img-fluid pad " src="{{ asset($book->image) }}" alt="Photo" width="195" height="293" ></a>
+
+                    {{-- <a href="{{ route('books.show',$book->id) }}"><img class="img-fluid pad " src="{{asset('img/books/'.$book->image)}}" alt="Photo" width="195" height="293" ></a> --}}
                     <p><b>{{$book->name}}</b></p>
                     <p>{{$book->author}}</p>
                     <button type="button" class="btn btn-outline-secondary btn-sm request"  id='request'><i class="fas fa-book" ></i> Request</button>

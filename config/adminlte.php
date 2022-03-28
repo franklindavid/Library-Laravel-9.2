@@ -281,7 +281,7 @@ return [
                 ],
                 [
                     'text' => 'Create',
-                    'url'  => '/books',
+                    'url'  => '/books/create',
                     'icon' => 'fas fa-fw fa-book',
                 ],
             ]
