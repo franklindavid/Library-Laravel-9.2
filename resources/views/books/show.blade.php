@@ -13,7 +13,7 @@
 <div class="row">
     <div class="col-12">
         <div class="card-body">
-            <img class="img-fluid pad " src="{{asset('img/books/'.$book->image)}}" alt="Photo" width="195" height="293" >
+            <img class="img-fluid pad " src="{{ asset($book->image) }}" alt="Photo" width="195" height="293" >
             <p><b>{{$book->name}}</b></p>
             <p>{{$book->author}}</p>
             <button type="button" class="btn btn-outline-secondary btn-sm request"  id='request'><i class="fas fa-book" ></i> Request</button>

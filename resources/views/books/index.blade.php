@@ -57,7 +57,7 @@
                                     <a title="modificar" href="{{ route('books.edit',$b->id) }}" class="btn btn-warning btn-xs">
                                         <i class="fa fa-wrench"></i>   
                                     </a>  
-                                    <a title="eliminar" href="{{ route('books.delete',$b->id) }}" class="btn btn-danger btn-xs">
+                                    <a title="eliminar" href="{{ route('books.destroy',$b->id) }}" class="btn btn-danger btn-xs">
                                         <i class="fa fa-times"></i>   
                                     </a>  
                                 </td>

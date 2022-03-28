@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreBookRequest;
+use App\Http\Requests\UpdateBookRequest;
 
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 use DB; 
 
 use Illuminate\Support\Facades\Redirect;
@@ -50,4 +52,33 @@ class BooksController extends Controller
         flash('Book Created Successfully!')->success();
         return Redirect::route('home'); 
     }    
+    public function edit($id)
+    {
+        $book = Book::find($id);    
+        // dd($book);
+        $categories = Category::all()->pluck('name','id');    
+        return view('books.edit', ['book'=>$book,'categories'=>$categories]);
+    } 
+    
+    public function update(UpdateBookRequest $request,$id)
+    {  
+        $book = Book::find($id);        
+        $book->isbn=$request->isbn;
+        $book->name=$request->name;
+        $book->author=$request->author;
+        $book->category_id=$request->category;
+        $book->publication_date=$request->publication_date;
+        $book->copies=$request->copies;        
+        if($request->hasFile('image')){
+                // dd(Storage::delete($book->image));
+            $book->image=str_replace('storage/','public/',$book->image);
+            // dd($book->image);
+            Storage::delete($book->image);
+            $path = $request->file('image')->store('public/img/books');
+            $book->image=str_replace('public/','storage/',$path);
+        }
+        $book->update();  
+        flash('Book Updated Successfully!')->warning();
+        return Redirect::route('home'); 
+    }
 }
