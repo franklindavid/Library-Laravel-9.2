@@ -16,4 +16,9 @@ class BooksController extends Controller
         $book = Book::find($id);    
         return view('books.show', ['book'=>$book]);
     }    
+    public function index(Request $request)
+    {
+        $book = Book::all();    
+        return view('books.index', ['book'=>$book]);
+    }    
 }

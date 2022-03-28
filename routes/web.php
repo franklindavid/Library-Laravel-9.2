@@ -28,5 +28,7 @@ Route::controller(BooksController::class)->group(function () {
     Route::get('/books/{id}', 'show')->name('books.show');
     Route::post('/books', 'store')->name('books.store');
     Route::get('/books', 'index')->name('books.index');
+    Route::get('/books/{id}/edit', 'edit')->name('books.edit');
+    Route::get('/books/{id}/delete', 'delete')->name('books.delete');
 });
 

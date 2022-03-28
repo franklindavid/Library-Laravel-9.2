@@ -39,14 +39,20 @@
                             <th>Id</th>
                             <th>Username</th>
                             <th>Date</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach  ($book->users as $bs)
-                            <tr>
+                            <tr id="row{{$bs->id}}">
                                 <td>{{$bs->id}}</td>
                                 <td>{{$bs->name}}</td>
                                 <td>{{$bs->pivot->created_at->diffForHumans()}}</td>
+                                <td>
+                                    <a title="return" href="#" class="btn btn-primary btn-xs return" id="return">
+                                        <i class="fa fa-arrow-alt-circle-up"></i>   
+                                    </a> 
+                                </td>
                             </tr>
                         @endforeach                        
                     </tbody>
@@ -64,9 +70,14 @@
 @section('js')
     <script> 
         $(document).ready( function () {
-            $('#table_id').DataTable();
+            var table = $('#table_id').DataTable();
         } );
-        $('.request').click(function() {
+        $('.return').click(function(e) {
+            console.log(e.target.parentElement.parentElement);
+            console.log(this.closest('tr'));
+            // document.getElementById("row1").remove();
+            // e.target.parentElement.parentElement.remove();
+                // e.target.parentElement.parentElement.parentElement.parentElement.removeChild(e.target.parentElement.parentElement.parentElement);
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -76,11 +87,13 @@
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, request it!'
                 }).then((result) => {
-                    console.log(result);
                     if (result.value==true) {
+                        this.closest('tr').remove();
+                        // $('#table_id').DataTable().ajax.reload(null, false);
+                        // $('#table_id').data.reload();
                         Swal.fire(
                             'requested!',
-                            'Your book has been requested.',
+                            'Your book has been return.',
                             'success'
                         )
                     }

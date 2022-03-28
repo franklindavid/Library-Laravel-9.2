@@ -31,7 +31,7 @@ return [
     |
     */
 
-    'use_ico_only' => false,
+    'use_ico_only' => true,
     'use_full_favicon' => false,
 
     /*
@@ -267,6 +267,24 @@ return [
             'text' => 'home',
             'url'  => '/home',
             'icon' => 'fas fa-fw fa-home',
+            
+        ],
+        [
+            'text' => 'Books',
+            // 'url'  => '/books',
+            'icon' => 'fas fa-fw fa-book',
+            'submenu' => [
+                [
+                    'text' => 'Consult',
+                    'url'  => '/books',
+                    'icon' => 'fas fa-fw fa-book',
+                ],
+                [
+                    'text' => 'Create',
+                    'url'  => '/books',
+                    'icon' => 'fas fa-fw fa-book',
+                ],
+            ]
         ],
         // [
         //     'text' => 'change_password',
