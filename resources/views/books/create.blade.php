@@ -3,6 +3,7 @@
 @section('title', 'Show Book')
 
 @section('plugins.Select2',true)
+@section('plugins.Sweetalert2',true)
 
 @section('content_header')
     <h1>Maniak Library Software</h1>
@@ -112,54 +113,5 @@
 
 @section('js')
     <script> 
-        // $(document).ready(function() {
-        //     $('#selectCategory').select2();
-        //     $("#datetimepicker").datetimepicker({
-        //             format:'YYYY-MM-DD HH:mm:ss'
-//                    format:'DD-MM-YYYY HH:mm:ss'
-                // });
-        // });
-        // $(function () {
-        //     $.validator.setDefaults({
-        //     submitHandler: function () {
-        //         alert( "Form successful submitted!" );
-        //     }
-        //     });
-        //     $('#formBook').validate({
-        //     rules: {
-        //         name: {
-        //         required: true,
-        //         },
-        //         password: {
-        //         required: true,
-        //         minlength: 5
-        //         },
-        //         terms: {
-        //         required: true
-        //         },
-        //     },
-        //     messages: {
-        //         name: {
-        //         required: "Please enter a email address",
-        //         },
-        //         password: {
-        //         required: "Please provide a password",
-        //         minlength: "Your password must be at least 5 characters long"
-        //         },
-        //         terms: "Please accept our terms"
-        //     },
-        //     errorElement: 'span',
-        //     errorPlacement: function (error, element) {
-        //         error.addClass('invalid-feedback');
-        //         element.closest('.form-group').append(error);
-        //     },
-        //     highlight: function (element, errorClass, validClass) {
-        //         $(element).addClass('is-invalid');
-        //     },
-        //     unhighlight: function (element, errorClass, validClass) {
-        //         $(element).removeClass('is-invalid');
-        //     }
-        //     });
-        //     });
     </script>
 @stop

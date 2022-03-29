@@ -31,18 +31,24 @@
             </div>
             <br>
             <dl class="row">
+                <dt class="col-sm-3">ISBN</dt>
+                <dd class="col-sm-9">{{$book->isbn}}</dd>
+
                 <dt class="col-sm-3">Name</dt>
                 <dd class="col-sm-9">{{$book->name}}</dd>
               
                 <dt class="col-sm-3">Author</dt>
-                <dd class="col-sm-9">
-                 {{$book->author}}
-                </dd>              
+                <dd class="col-sm-9">{{$book->author}}</dd>     
+
+                <dt class="col-sm-3">Publication date</dt>
+                <dd class="col-sm-9">{{$book->publication_date}}</dd>      
+
                 <dt class="col-sm-3">Category</dt>
                 <dd class="col-sm-9">
                     <p>{{$book->category->name}}</p>
                     <p>{{$book->category->description}}</p>
                 </dd>
+                
               </dl>
         </div>
     </div>   
