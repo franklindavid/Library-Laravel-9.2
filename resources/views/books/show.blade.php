@@ -14,15 +14,36 @@
 <div class="row">
     <div class="col-12">
         <div class="card-body">
-            <img class="img-fluid pad " src="{{ asset($book->image) }}" alt="Photo" width="195" height="293" >
-            <p><b>{{$book->name}}</b></p>
-            <p>{{$book->author}}</p>
-            <button type="button" class="btn btn-outline-secondary btn-sm request"  id='request'><i class="fas fa-book" ></i> Request</button>
-            @if ($book->copies==0)
-            <button type="button" class="btn btn-outline-danger btn-sm"><i class="far fa-list"></i>{{$book->copies}} copies</button>
-            @else 
-            <button type="button" class="btn btn-outline-primary btn-sm"><i class="far fa-list"></i>{{$book->copies}} copies</button>
-            @endif
+            <div class="row">
+                <img class="img-fluid pad " src="{{ asset($book->image) }}" alt="Photo" width="195" height="293" >
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <form action="{{ route('books.request',$book->id) }}" method="get">
+                    @if ($book->copies==0)
+                        <button type="button" class="btn btn-outline-danger btn-sm"><i class="far fa-list"></i>{{$book->copies}} copies</button>
+                    @else 
+                        <button  class="btn btn-outline-secondary btn-sm" id="submitForm"><i class="fas fa-book"></i>Request</button>
+                        <button type="button" class="btn btn-outline-primary btn-sm"><i class="far fa-list"></i>{{$book->copies}} copies</button>
+                    @endif
+                </form>
+            </div>
+            <br>
+            <dl class="row">
+                <dt class="col-sm-3">Name</dt>
+                <dd class="col-sm-9">{{$book->name}}</dd>
+              
+                <dt class="col-sm-3">Author</dt>
+                <dd class="col-sm-9">
+                 {{$book->author}}
+                </dd>              
+                <dt class="col-sm-3">Category</dt>
+                <dd class="col-sm-9">
+                    <p>{{$book->category->name}}</p>
+                    <p>{{$book->category->description}}</p>
+                </dd>
+              </dl>
         </div>
     </div>   
 </div>  
@@ -82,13 +103,12 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, return it!'
+                confirmButtonText: 'Yes, request it!'
                 }).then((result) => {
-                    if (result.value==true) {
-                        // this.closest('tr').remove();
+                    if (result.value==true) {                        
                         Swal.fire(
-                            'returned!',
-                            'Your book has been return.',
+                            'requested!',
+                            'Your book has been requested.',
                             'success'
                         )
                         setTimeout(()=>{

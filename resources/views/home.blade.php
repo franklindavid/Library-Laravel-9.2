@@ -28,12 +28,12 @@
                     <form action="{{ route('books.request',$book->id) }}" method="get">
                         <button type="button" class="btn btn-outline-success btn-sm" onclick="location.href='{{ route('books.show',$book->id) }}'" ><i class="fas fa-eye"></i> Watch</button>
                         @if ($book->copies==0)
-                        <button type="button" class="btn btn-outline-danger btn-sm"><i class="far fa-list"></i>{{$book->copies}} copies</button>
+                            <button type="button" class="btn btn-outline-danger btn-sm"><i class="far fa-list"></i>{{$book->copies}} copies</button>
                         @else 
                             <button  class="btn btn-outline-secondary btn-sm" id="submitForm"><i class="fas fa-book"></i>Request</button>
                             <button type="button" class="btn btn-outline-primary btn-sm"><i class="far fa-list"></i>{{$book->copies}} copies</button>
-                    @endif
-                    </form>
+                        @endif
+                    </form>                    
                 </div>  
             </div>
         @if ($count==3 )

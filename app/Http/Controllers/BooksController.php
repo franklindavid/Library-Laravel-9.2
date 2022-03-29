@@ -106,7 +106,7 @@ class BooksController extends Controller
             $book->update();
             $bookUser->save();
             flash('Book has been requested Successfully!')->success();
-            return Redirect::route('home'); 
+            return Redirect::route('books.show',$bookUser->book_id); 
         }        
     }
 
