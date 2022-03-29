@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BooksController;
-                         
+use App\Http\Controllers\BooksController;               
 
 
 
@@ -20,16 +19,15 @@ use App\Http\Controllers\BooksController;
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('books',BooksController::class); 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::resource('books',BooksController::class)->middleware('auth');
 Route::controller(BooksController::class)->group(function () {
 //     Route::get('/books/{id}', 'show')->name('books.show');
 //     Route::post('/books', 'store')->name('books.store');
 //     Route::get('/books', 'index')->name('books.index');
 //     Route::get('/books/{id}/edit', 'edit')->name('books.edit');
-    Route::get('/books/{id}/delete', 'delete')->name('books.delete');
-    Route::get('/books/{id}/request', 'request')->name('books.request');
-    Route::get('/books/{id}/return', 'return')->name('books.return');
+    Route::get('/books/{id}/delete', 'delete')->name('books.delete')->middleware('auth');
+    Route::get('/books/{id}/request', 'request')->name('books.request')->middleware('auth');
+    Route::get('/books/{id}/return', 'return')->name('books.return')->middleware('auth');
 //     Route::get('/books/create', 'create')->name('books.create');
 });
-
