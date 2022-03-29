@@ -7,6 +7,7 @@ use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 
 use App\Models\Book;
+use App\Models\bookUser;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
@@ -90,5 +91,23 @@ class BooksController extends Controller
         $book->delete(); 
         flash('Book has been deleted Successfully!')->error();
         return Redirect::route('books.index'); 
+    }
+
+    public function request($id)
+    {  
+        $book = Book::find($id); 
+        if($book->copies==0){
+            flash('the book is out of stock!')->error();
+            return Redirect::route('home'); 
+        }else{
+            $book->copies=$book->copies-1;
+            $bookUser = new BookUser;   
+            $bookUser->book_id= $id;
+            $bookUser->user_id= auth()->user()->id;
+            $book->update();
+            $bookUser->save();
+            flash('Book has been requested Successfully!')->success();
+            return Redirect::route('home'); 
+        }        
     }
 }

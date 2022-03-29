@@ -22,18 +22,18 @@
         @endif        
             <div class="col-md-4">
                 <div class="card-body">   
-                    <a href="{{ route('books.show',$book->id) }}"><img class="img-fluid pad " src="{{ asset($book->image) }}" alt="Photo" width="195" height="293" ></a>
-
-                    {{-- <a href="{{ route('books.show',$book->id) }}"><img class="img-fluid pad " src="{{asset('img/books/'.$book->image)}}" alt="Photo" width="195" height="293" ></a> --}}
+                    <a href="{{ route('books.show',$book->id) }}"><img class="img-fluid pad " src="{{ asset($book->image) }}" alt="Photo" width="195" height="293" ></a>                    
                     <p><b>{{$book->name}}</b></p>
                     <p>{{$book->author}}</p>
-                    <button type="button" class="btn btn-outline-secondary btn-sm request"  id='request'><i class="fas fa-book" ></i> Request</button>
-                    <button type="button" class="btn btn-outline-success btn-sm" onclick="location.href='{{ route('books.show',$book->id) }}'" ><i class="fas fa-eye"></i> Watch</button>
-                    @if ($book->copies==0)
+                    <form action="{{ route('books.request',$book->id) }}" method="get">
+                        <button type="button" class="btn btn-outline-success btn-sm" onclick="location.href='{{ route('books.show',$book->id) }}'" ><i class="fas fa-eye"></i> Watch</button>
+                        @if ($book->copies==0)
                         <button type="button" class="btn btn-outline-danger btn-sm"><i class="far fa-list"></i>{{$book->copies}} copies</button>
-                    @else 
-                        <button type="button" class="btn btn-outline-primary btn-sm"><i class="far fa-list"></i>{{$book->copies}} copies</button>
+                        @else 
+                            <button  class="btn btn-outline-secondary btn-sm" id="submitForm"><i class="fas fa-book"></i>Request</button>
+                            <button type="button" class="btn btn-outline-primary btn-sm"><i class="far fa-list"></i>{{$book->copies}} copies</button>
                     @endif
+                    </form>
                 </div>  
             </div>
         @if ($count==3 )
@@ -51,7 +51,8 @@
 
 @section('js')
     <script> 
-        $('.request').click(function() {
+        $('#submitForm').click(function(e) {
+            e.preventDefault();
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -61,12 +62,15 @@
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, request it!'
                 }).then((result) => {
-                    if (result.value==true) {
+                    if (result.value==true) {                        
                         Swal.fire(
                             'requested!',
                             'Your book has been requested.',
                             'success'
                         )
+                        setTimeout(()=>{
+                            $(this).parents('form').submit();
+                        },2000); 
                     }
                 });
         });

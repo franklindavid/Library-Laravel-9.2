@@ -46,9 +46,7 @@
                                         <span class="badge badge-danger">{{$b->copies}}</span>                                                                                
                                     @else
                                         {{$b->copies}}   
-                                    @endif
-                                    
-                                
+                                    @endif   
                                 </td>
                                 <td>{{date("Y-m-d",strtotime($b->created_at))}}</td>
                                 <td>
@@ -92,15 +90,15 @@
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
-                    if (result.value==true) {
-                        setTimeout(()=>{
-                            $(this).parents('form').submit();
-                        },2000);                        
+                    if (result.value==true) {                                              
                         Swal.fire(
                             'requested!',
                             'Your book has been deleted.',
                             'success'
                         )
+                        setTimeout(()=>{
+                            $(this).parents('form').submit();
+                        },2000); 
                     }
                 });
         });
