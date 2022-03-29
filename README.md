@@ -1,10 +1,10 @@
 # Library Software laravel 9.2
  
-#Clone the repository
+Clone the repository
 
     https://github.com/franklindavid/Library-Laravel-9.2.git
 
-Switch to the repo folder
+Switch to the repository folder
 
     cd Library-Laravel-9.2
 
@@ -16,15 +16,7 @@ Copy the example env file and make the required configuration changes in the .en
 
     cp .env.example .env
 
-Generate a new application key
-
-    php artisan key:generate
-
-Generate a new JWT authentication secret key
-
-    php artisan jwt:generate
-
-Run the database migrations (Set the database connection in .env before migrating)
+Run the database migrations 
 
     php artisan migrate
 
@@ -32,6 +24,6 @@ Start the local development server
 
     php artisan serve
 
-Run the database seeder and you're done
+Run the database seeder
 
     php artisan db:seed
