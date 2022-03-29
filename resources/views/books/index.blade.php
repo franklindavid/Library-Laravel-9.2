@@ -10,6 +10,7 @@
 @stop
 
 @section('content') 
+@include('flash::message')
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -57,9 +58,11 @@
                                     <a title="modificar" href="{{ route('books.edit',$b->id) }}" class="btn btn-warning btn-xs">
                                         <i class="fa fa-wrench"></i>   
                                     </a>  
-                                    <a title="eliminar" href="{{ route('books.destroy',$b->id) }}" class="btn btn-danger btn-xs">
-                                        <i class="fa fa-times"></i>   
+                                    {{-- <button  class="btn btn-danger btn-xs delete" href="{{ route('books.delete',$b->id) }}" id="e{{$b->id}}"><i class="fa fa-times" ></i></button> --}}
+                                    <a title="eliminar" href="{{ route('books.delete',$b->id) }} " class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete the book?')">
+                                        <i class="fa fa-times" ></i>   
                                     </a>  
+                                    {{-- {{ route('books.delete',$b->id) }} --}}
                                 </td>
                             </tr>
                         @endforeach                        
@@ -80,7 +83,8 @@
         $(document).ready( function () {
             $('#table_id').DataTable();
         } );
-        $('.request').click(function() {
+        $('.delete').click(function(e) {
+            e.preventDefault();
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -88,13 +92,18 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, request it!'
+                confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
-                    console.log(result);
                     if (result.value==true) {
+                        return (true);
+                        // console.log($(this).id);
+                        
+                        // setTimeout(()=>{
+                        //     window.location.href = e.target.getAttribute("href");
+                        // },1000);                        
                         Swal.fire(
                             'requested!',
-                            'Your book has been requested.',
+                            'Your book has been deleted.',
                             'success'
                         )
                     }

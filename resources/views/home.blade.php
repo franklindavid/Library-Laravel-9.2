@@ -61,7 +61,6 @@
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, request it!'
                 }).then((result) => {
-                    console.log(result);
                     if (result.value==true) {
                         Swal.fire(
                             'requested!',

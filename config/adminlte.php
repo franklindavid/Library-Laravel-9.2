@@ -275,9 +275,9 @@ return [
             'icon' => 'fas fa-fw fa-book',
             'submenu' => [
                 [
-                    'text' => 'Consult',
+                    'text' => 'List',
                     'url'  => '/books',
-                    'icon' => 'fas fa-fw fa-book',
+                    'icon' => 'fas fa-fw fa-list',
                 ],
                 [
                     'text' => 'Create',

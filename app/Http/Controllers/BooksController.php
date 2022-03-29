@@ -81,4 +81,14 @@ class BooksController extends Controller
         flash('Book Updated Successfully!')->warning();
         return Redirect::route('home'); 
     }
+
+    public function delete($id)
+    {  
+        $book = Book::find($id); 
+        $book->image=str_replace('storage/','public/',$book->image);
+        Storage::delete($book->image);
+        $book->delete(); 
+        flash('Book has been deleted Successfully!')->error();
+        return Redirect::route('books.index'); 
+    }
 }
