@@ -44,6 +44,6 @@ class User extends Authenticatable
 
     public function books()
     {
-        return $this->belongsToMany(Book::class)->withTimestamps();
+        return $this->belongsToMany(Book::class)->withPivot('id')->withTimestamps();
     }
 }

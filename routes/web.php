@@ -29,6 +29,7 @@ Route::controller(BooksController::class)->group(function () {
 //     Route::get('/books/{id}/edit', 'edit')->name('books.edit');
     Route::get('/books/{id}/delete', 'delete')->name('books.delete');
     Route::get('/books/{id}/request', 'request')->name('books.request');
+    Route::get('/books/{id}/return', 'return')->name('books.return');
 //     Route::get('/books/create', 'create')->name('books.create');
 });
 

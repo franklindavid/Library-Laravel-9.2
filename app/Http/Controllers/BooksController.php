@@ -93,8 +93,7 @@ class BooksController extends Controller
         return Redirect::route('books.index'); 
     }
 
-    public function request($id)
-    {  
+    public function request($id){  
         $book = Book::find($id); 
         if($book->copies==0){
             flash('the book is out of stock!')->error();
@@ -109,5 +108,15 @@ class BooksController extends Controller
             flash('Book has been requested Successfully!')->success();
             return Redirect::route('home'); 
         }        
+    }
+
+    public function return($id){  
+        $bookUser =  BookUser::find($id); 
+        $book = Book::find($bookUser->book_id);
+        $book->copies=$book->copies+1; 
+        $book->update();
+        $bookUser->delete();
+        flash('Book has been returned Successfully!')->success();
+        return Redirect::route('books.show',$bookUser->book_id);        
     }
 }

@@ -9,7 +9,8 @@
     <h1>Maniak Library Software</h1>
 @stop
 
-@section('content')     
+@section('content')  
+@include('flash::message')   
 <div class="row">
     <div class="col-12">
         <div class="card-body">
@@ -49,9 +50,9 @@
                                 <td>{{$bs->name}}</td>
                                 <td>{{$bs->pivot->created_at->diffForHumans()}}</td>
                                 <td>
-                                    <a title="return" href="#" class="btn btn-primary btn-xs return" id="return">
-                                        <i class="fa fa-arrow-alt-circle-up"></i>   
-                                    </a> 
+                                    <form action="{{ route('books.return',$bs->pivot->id) }}" method="get">
+                                        <button  class="btn btn-primary btn-xs" id="submitForm"><i class="fa fa-arrow-alt-circle-up"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach                        
@@ -72,12 +73,8 @@
         $(document).ready( function () {
             var table = $('#table_id').DataTable();
         } );
-        $('.return').click(function(e) {
-            console.log(e.target.parentElement.parentElement);
-            console.log(this.closest('tr'));
-            // document.getElementById("row1").remove();
-            // e.target.parentElement.parentElement.remove();
-                // e.target.parentElement.parentElement.parentElement.parentElement.removeChild(e.target.parentElement.parentElement.parentElement);
+        $('#submitForm').click(function(e) {
+            e.preventDefault();
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -85,17 +82,18 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, request it!'
+                confirmButtonText: 'Yes, return it!'
                 }).then((result) => {
                     if (result.value==true) {
-                        this.closest('tr').remove();
-                        // $('#table_id').DataTable().ajax.reload(null, false);
-                        // $('#table_id').data.reload();
+                        // this.closest('tr').remove();
                         Swal.fire(
-                            'requested!',
+                            'returned!',
                             'Your book has been return.',
                             'success'
                         )
+                        setTimeout(()=>{
+                            $(this).parents('form').submit();
+                        },2000); 
                     }
                 });
         });
