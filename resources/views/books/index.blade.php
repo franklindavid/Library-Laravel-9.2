@@ -52,17 +52,15 @@
                                 </td>
                                 <td>{{date("Y-m-d",strtotime($b->created_at))}}</td>
                                 <td>
-                                    <a title="ver" href="{{ route('books.show',$b->id) }}" class="btn btn-success btn-xs">
-                                        <i class="fa fa-eye"></i>   
-                                    </a>  
-                                    <a title="modificar" href="{{ route('books.edit',$b->id) }}" class="btn btn-warning btn-xs">
-                                        <i class="fa fa-wrench"></i>   
-                                    </a>  
-                                    {{-- <button  class="btn btn-danger btn-xs delete" href="{{ route('books.delete',$b->id) }}" id="e{{$b->id}}"><i class="fa fa-times" ></i></button> --}}
-                                    <a title="eliminar" href="{{ route('books.delete',$b->id) }} " class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete the book?')">
-                                        <i class="fa fa-times" ></i>   
-                                    </a>  
-                                    {{-- {{ route('books.delete',$b->id) }} --}}
+                                    <form action="{{ route('books.delete',$b->id) }}" method="get">
+                                        <a title="ver" href="{{ route('books.show',$b->id) }}" class="btn btn-success btn-xs">
+                                            <i class="fa fa-eye"></i>   
+                                        </a>  
+                                        <a title="modificar" href="{{ route('books.edit',$b->id) }}" class="btn btn-warning btn-xs">
+                                            <i class="fa fa-wrench"></i>   
+                                        </a>                                      
+                                        <button  class="btn btn-danger btn-xs" id="submitForm"><i class="fa fa-times"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach                        
@@ -83,7 +81,7 @@
         $(document).ready( function () {
             $('#table_id').DataTable();
         } );
-        $('.delete').click(function(e) {
+        $('#submitForm').click(function(e) {
             e.preventDefault();
             Swal.fire({
                 title: 'Are you sure?',
@@ -95,12 +93,9 @@
                 confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.value==true) {
-                        return (true);
-                        // console.log($(this).id);
-                        
-                        // setTimeout(()=>{
-                        //     window.location.href = e.target.getAttribute("href");
-                        // },1000);                        
+                        setTimeout(()=>{
+                            $(this).parents('form').submit();
+                        },2000);                        
                         Swal.fire(
                             'requested!',
                             'Your book has been deleted.',
