@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Maniak Library',
     'title_prefix' => '',
     'title_postfix' => '',
 
