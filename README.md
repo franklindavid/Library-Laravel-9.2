@@ -2,7 +2,7 @@
 
 Video preview
 
-        https://youtu.be/ngS3oGPSz3M
+        http://youtu.be/ngS3oGPSz3M
  
 Clone the repository
 
